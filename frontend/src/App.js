@@ -5,11 +5,11 @@ function App() {
   const [sequence, setSequence] = useState('');
   const [predictedSST3Structure, setPredictedSST3Structure] = useState('');
   const [predictedSST8Structure, setPredictedSST8Structure] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // New state to track loading
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     try {
       const response = await fetch('http://localhost:5000/predict', {
         method: 'POST',
@@ -28,7 +28,7 @@ function App() {
     } catch (error) {
       console.error("Failed to fetch: ", error);
     } finally {
-      setIsLoading(false); // Stop loading regardless of request outcome
+      setIsLoading(false);
     }
   };
 
@@ -36,7 +36,7 @@ function App() {
     setSequence('');
     setPredictedSST3Structure('');
     setPredictedSST8Structure('');
-    setIsLoading(false); // Also reset loading state
+    setIsLoading(false);
   };
 
   return (
