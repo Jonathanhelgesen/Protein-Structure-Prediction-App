@@ -5,9 +5,11 @@ function App() {
   const [sequence, setSequence] = useState('');
   const [predictedSST3Structure, setPredictedSST3Structure] = useState('');
   const [predictedSST8Structure, setPredictedSST8Structure] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // New state to track loading
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading
     try {
       const response = await fetch('http://localhost:5000/predict', {
         method: 'POST',
@@ -25,6 +27,8 @@ function App() {
       setPredictedSST8Structure(data.predicted_sst8_structure.replace(/\s/g, '').toUpperCase());
     } catch (error) {
       console.error("Failed to fetch: ", error);
+    } finally {
+      setIsLoading(false); // Stop loading regardless of request outcome
     }
   };
 
@@ -32,6 +36,7 @@ function App() {
     setSequence('');
     setPredictedSST3Structure('');
     setPredictedSST8Structure('');
+    setIsLoading(false); // Also reset loading state
   };
 
   return (
@@ -48,10 +53,15 @@ function App() {
             spellCheck="false"
           />
           <div className="buttons">
-            <button type="submit" className="submit-btn">Predict</button>
-            <button type="button" className="clear-btn" onClick={handleClear}>Clear</button>
+            <button type="submit" className="submit-btn" disabled={isLoading}>
+              {isLoading ? 'Predicting...' : 'Predict'}
+            </button>
+            <button type="button" className="clear-btn" onClick={handleClear}>
+              Clear
+            </button>
           </div>
         </form>
+        {isLoading && <div>Loading...</div>} {/* Display loading indicator */}
         {predictedSST3Structure && (
           <div className="output-box">
             <p>Predicted SST3 Structure: <span>{predictedSST3Structure}</span></p>
