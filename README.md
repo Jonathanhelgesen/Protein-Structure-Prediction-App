@@ -1,6 +1,6 @@
 # Setup Guide
 
-This guide will explain how to run the web application for predicting the secondary structure of proteins. The application consists of two main parts: the backend, built with Flask, and the frontend, developed with React.
+This guide will explain how to run the web application for predicting the secondary structure of proteins. The application consists of two main parts: the backend, built with Flask, and the frontend, developed with React. Note: If you are looking for the code regarding the pre-processing of the dataset and training of the models, navigate to the `data-and-machine-learning/` folder.
 
 ## Prerequisites
 
