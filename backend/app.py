@@ -45,6 +45,8 @@ with open('sst8_tokenizer (1).pickle', 'rb') as handle:
 
 max_length = 400
 
+# Set up the predict endpoint
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -64,6 +66,7 @@ def predict():
     predicted_sst3_indices = np.argmax(prediction_sst3, axis=-1)[0]
     predicted_sst8_indices = np.argmax(prediction_sst8, axis=-1)[0]
 
+    # Convert the indices to labels
     predicted_sst3_structure = ' '.join(
         [sst3_tokenizer.index_word.get(i, '') for i in predicted_sst3_indices if i > 0])
     predicted_sst8_structure = ' '.join(

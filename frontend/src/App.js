@@ -7,6 +7,7 @@ function App() {
   const [predictedSST8Structure, setPredictedSST8Structure] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // Fetch the predicted secondary structure from the backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -23,6 +24,7 @@ function App() {
       }
       const data = await response.json();
 
+	  // Update the state with the predicted secondary structure
       setPredictedSST3Structure(data.predicted_sst3_structure.replace(/\s/g, '').toUpperCase());
       setPredictedSST8Structure(data.predicted_sst8_structure.replace(/\s/g, '').toUpperCase());
     } catch (error) {
@@ -32,6 +34,7 @@ function App() {
     }
   };
 
+  // Clear the input and output fields
   const handleClear = () => {
     setSequence('');
     setPredictedSST3Structure('');
